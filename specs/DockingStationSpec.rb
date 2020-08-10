@@ -86,21 +86,6 @@ end
 # it releases a working bike if there is one available
 # it gives a helpful message if none is available
 
-it 'does not release a broken bike' do
-  #setup and execute
-  docking_station = DockingStation.new
-  bike = Bike.new
-  bike.not_working
-  docking_station.dock(bike)
-
-  #execute
-  result = docking_station.release
-  expected = nil
-
-  #verify
-  check_result(expected, result)
-end
-
 it 'releaes a working bike if there is one available' do
   #setup and execute
   docking_station = DockingStation.new
@@ -117,3 +102,22 @@ it 'releaes a working bike if there is one available' do
   #verify
   check_result(expected, result)
 end
+
+it "gives a helpful message if none is available" do
+  #setup and execute
+  docking_station = DockingStation.new
+  broken_bike = Bike.new
+  very_broken_bike = Bike.new
+  broken_bike.not_working
+  very_broken_bike.not_working
+  docking_station.dock(broken_bike)
+  docking_station.dock(very_broken_bike)
+
+  #execute
+  result = docking_station.release
+  expected = "Sorry there are no working bikes available"
+
+  #verify
+  check_result(expected, result)
+end
+

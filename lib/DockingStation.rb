@@ -14,12 +14,12 @@ class DockingStation
 
   def release
     return "Sorry there are none" if empty?
-    bikes.each do |bike|
-      if bike.working
-        return bike
-      end
-    end
-    nil
+    return "Sorry there are no working bikes available" if no_working_bikes?
+    bikes.find { |bike| bike.working }
+  end
+
+  def broken_bikes
+    bikes.select { |bike| !bike.working }
   end
 
   private
@@ -29,5 +29,9 @@ class DockingStation
 
   def empty?
     bikes.length == 0
+  end
+
+  def no_working_bikes?
+    bikes.all? { |bike| !bike.working }
   end
 end

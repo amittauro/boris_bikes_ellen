@@ -38,3 +38,32 @@ bike | working
 As a system maintainer,
 So that I can manage broken bikes and not disappoint users,
 I’d like docking stations to accept returning bikes (broken or not).
+
+object | messages | scenario
+docking station | dock(Bike) | Bike is working
+docking station | dock(Bike) | Bike is not working
+
+Previous tests cover these scenarios (docking working and non-working bikes.)
+
+
+# Extension
+As a system maintainer,
+So that I can manage broken bikes and not disappoint users,
+I’d like vans to take broken bikes from docking stations and deliver them to garages to be fixed.
+
+object | messages | scenario
+van | collect(Bike) | Bike must be broken
+van | deliver(Bike) | Bike must be broken
+garage | receive(Bikes) | Bikes must be broken
+
+
+
+
+it "collects broken bikes"
+
+
+As a system maintainer,
+So that I can manage broken bikes and not disappoint users,
+I’d like vans to collect working bikes from garages and distribute them to docking stations.
+
+van | returns(Bike) | Bike 
